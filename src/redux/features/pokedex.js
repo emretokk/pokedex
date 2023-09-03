@@ -11,7 +11,9 @@ export const pokedexSlice = createSlice({
   initialState: {
     loading: true,
     nextPokemon: 1,
-    curPokemon: 0,
+    prevPokemon: 1,
+    curPokemon: 1,
+    pokeImg: "",
     pokeName: "",
   },
   reducers: {},
@@ -23,8 +25,14 @@ export const pokedexSlice = createSlice({
       state.loading = false;
       state.pokeName = action.payload.name;
       state.curPokemon = action.payload.id;
-      state.nextPokemon++;
-      console.log(action.payload);
+      state.pokeImg = action.payload.sprites.front_default;
+      if (state.curPokemon != 1) {
+        state.prevPokemon = state.curPokemon - 1;
+        state.nextPokemon = state.curPokemon + 1;
+      } else if (state.curPokemon == 1) {
+        state.nextPokemon = state.curPokemon + 1;
+        state.prevPokemon = state.curPokemon;
+      }
     });
   },
 });

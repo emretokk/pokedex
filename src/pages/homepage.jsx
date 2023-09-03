@@ -2,41 +2,65 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPokemon, getNextPokemon } from "../redux/features/pokedex";
 import pokedexImg from "../assets/pokedex.png";
+import bgImg from "../assets/bg.png";
 
 function Homepage() {
   const dispatch = useDispatch();
-  const { loading, curPokemon, nextPokemon, pokeName } = useSelector(
-    (state) => state.pokedex
-  );
+  const { loading, curPokemon, nextPokemon, pokeName, prevPokemon, pokeImg } =
+    useSelector((state) => state.pokedex);
   useEffect(() => {
     dispatch(getPokemon(nextPokemon));
   }, []);
 
   return (
-    <div id="Homepage" className="w-screen h-screen relative">
+    <div
+      id="Homepage"
+      className="w-screen h-screen relative"
+      style={{
+        backgroundImage: `url(${bgImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "110% 100%",
+      }}
+    >
       <img
         className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
         src={pokedexImg}
         alt="pokedex"
       />
+      <div id="pokeImgContainer">
+        <img
+          src={pokeImg}
+          alt="poke"
+          className="absolute top-[19.8rem] left-[35rem] scale-125"
+        />
+      </div>
       {loading ? (
         ""
       ) : (
-        <span className="absolute top-[17.5rem] left-[44rem] -rotate-2 text-3xl text-white">
-          {pokeName}
+        <span className="absolute top-[17.5rem] left-[52rem] -rotate-2 text-3xl text-white">
+          #{curPokemon} {pokeName}
         </span>
       )}
       <button
-        className="w-[5.4rem] h-8 absolute top-[31.7rem] left-[41.3rem] -rotate-2 rounded text-white hover:bg-gray-500"
+        className="w-[5.4rem] h-8 absolute top-[31.7rem] left-[51.72rem] -rotate-[1.5deg] rounded text-white hover:bg-gray-500"
+        onClick={() => {
+          dispatch(getPokemon(prevPokemon));
+        }}
+      >
+        Prev
+      </button>
+
+      <button
+        className="w-[6rem] h-8 absolute top-[31.5rem] left-[58.9rem] -rotate-[1.5deg] rounded text-white hover:bg-gray-500"
         onClick={() => {
           dispatch(getPokemon(nextPokemon));
         }}
       >
         Next
       </button>
-      <button></button>
       {/* <span>
-        Current Pokemon Id: {curPokemon} <br /> Next Pokemon Id: {nextPokemon}
+        Current Pokemon Id: {curPokemon} <br /> Next Pokemon Id: {nextPokemon}{" "}
+        <br /> Prev Pokemon Id: {prevPokemon}
       </span> */}
     </div>
   );
