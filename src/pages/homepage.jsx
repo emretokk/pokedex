@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getPokemon, getNextPokemon } from "../redux/features/pokedex";
+import { getPokemon } from "../redux/features/pokedex";
 import pokedexImg from "../assets/pokedex.png";
 import bgImg from "../assets/bg.png";
 
@@ -37,7 +37,7 @@ function Homepage() {
       {loading ? (
         ""
       ) : (
-        <span className="absolute top-[17.8rem] left-[52rem] -rotate-3 text-2xl text-white font-mono">
+        <span className="absolute w-[12.8rem] top-[17.8rem] left-[52rem] -rotate-3 text-2xl text-white font-mono text-center">
           #{curPokemon} {pokeName}
         </span>
       )}
