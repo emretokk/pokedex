@@ -37,7 +37,7 @@ function Homepage() {
       {loading ? (
         ""
       ) : (
-        <span className="absolute top-[17.5rem] left-[52rem] -rotate-2 text-3xl text-white">
+        <span className="absolute top-[17.8rem] left-[52rem] -rotate-3 text-2xl text-white font-mono">
           #{curPokemon} {pokeName}
         </span>
       )}
